@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>EFRPG_Rider</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="RiderNorthwind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RiderNorthwind.cs</LastGenOutput>
+    </None>
+    <None Update="VsNorthwind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VsNorthwind.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="RiderNorthwind.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RiderNorthwind.tt</DependentUpon>
+    </Compile>
+    <Compile Update="VsNorthwind.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VsNorthwind.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
