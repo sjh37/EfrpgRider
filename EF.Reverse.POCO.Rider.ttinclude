@@ -2963,7 +2963,9 @@
 
         public string GenerateUsings(List<string> usings)
         {
-            return !usings.Any() ? null : Template.Transform(Template.Usings(), usings);
+            var code = Template.Transform(Template.Usings(), usings)
+                .Replace("\n\n", "");
+            return !usings.Any() ? null : code;
         }
 
         public CodeOutput GenerateInterface()
@@ -3368,8 +3370,14 @@
 
         public void AddCode(string code)
         {
-            if(code != null)
-                Code.AddRange(code.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+            if (code == null) 
+                return;
+
+            var lines = code.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            foreach (var line in lines)
+            {
+                Code.Add(line.Replace("\n", ""));
+            }
         }
 
         public void AddUsings(List<string> usings)
