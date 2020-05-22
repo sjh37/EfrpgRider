@@ -2963,8 +2963,11 @@
 
         public string GenerateUsings(List<string> usings)
         {
-            var code = Template.Transform(Template.Usings(), usings)
-                .Replace("\n\n", "");
+            var code = Template.Transform(Template.Usings(), usings);
+            
+            // Fix for Rider
+            //code = code.Replace("\n\n", "");
+            
             return !usings.Any() ? null : code;
         }
 
@@ -3373,11 +3376,14 @@
             if (code == null) 
                 return;
 
-            var lines = code.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            // Fix for Rider
+            /*var lines = code.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             foreach (var line in lines)
             {
                 Code.Add(line.Replace("\n", ""));
-            }
+            }*/
+
+            Code.AddRange(code.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
         }
 
         public void AddUsings(List<string> usings)
