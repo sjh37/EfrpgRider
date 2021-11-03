@@ -2963,10 +2963,7 @@
 
         public string GenerateUsings(List<string> usings)
         {
-            var code = Template.Transform(Template.Usings(), usings);
-            
-            // Fix for Rider
-            //code = code.Replace("\n\n", "");
+            var code = Template.Transform(Template.Usings().Replace("\n", string.Empty), usings);
             
             return !usings.Any() ? null : code;
         }
@@ -2999,7 +2996,7 @@
 
             var co = new CodeOutput(filename, "Database context interface", GlobalUsings);
             co.AddUsings(Template.DatabaseContextInterfaceUsings(data));
-            co.AddCode(Template.Transform(Template.DatabaseContextInterface(), data));
+            co.AddCode(Template.Transform(Template.DatabaseContextInterface().Replace("\n", string.Empty), data));
 
             return co;
         }
@@ -3075,7 +3072,7 @@
 
             var co = new CodeOutput(filename, "Database context", GlobalUsings);
             co.AddUsings(Template.DatabaseContextUsings(data));
-            co.AddCode(Template.Transform(Template.DatabaseContext(), data));
+            co.AddCode(Template.Transform(Template.DatabaseContext().Replace("\n", string.Empty), data));
 
             return co;
         }
@@ -3105,7 +3102,7 @@
 
             var co = new CodeOutput(filename, "Fake Database context", GlobalUsings);
             co.AddUsings(Template.FakeDatabaseContextUsings(data, _filter));
-            co.AddCode(Template.Transform(Template.FakeDatabaseContext(), data));
+            co.AddCode(Template.Transform(Template.FakeDatabaseContext().Replace("\n", string.Empty), data));
 
             return co;
         }
@@ -3129,7 +3126,7 @@
 
             var co = new CodeOutput(filename, "Fake DbSet", GlobalUsings);
             co.AddUsings(Template.FakeDbSetUsings(data));
-            co.AddCode(Template.Transform(Template.FakeDbSet(), data));
+            co.AddCode(Template.Transform(Template.FakeDbSet().Replace("\n", string.Empty), data));
 
             return co;
         }
@@ -3151,7 +3148,7 @@
 
             var co = new CodeOutput(filename, "Database context factory", GlobalUsings);
             co.AddUsings(Template.DatabaseContextFactoryUsings(data));
-            co.AddCode(Template.Transform(Template.DatabaseContextFactory(), data));
+            co.AddCode(Template.Transform(Template.DatabaseContextFactory().Replace("\n", string.Empty), data));
             return co;
         }
 
@@ -3238,7 +3235,7 @@
 
             var co = new CodeOutput(filename, null, GlobalUsings);
             co.AddUsings(Template.PocoUsings(data));
-            co.AddCode(Template.Transform(Template.Poco(), data));
+            co.AddCode(Template.Transform(Template.Poco().Replace("\n", string.Empty), data));
             return co;
         }
 
@@ -3300,7 +3297,7 @@
 
             var co = new CodeOutput(filename, null, GlobalUsings);
             co.AddUsings(Template.PocoConfigurationUsings(data));
-            co.AddCode(Template.Transform(Template.PocoConfiguration(), data));
+            co.AddCode(Template.Transform(Template.PocoConfiguration().Replace("\n", string.Empty), data));
             return co;
         }
 
@@ -3334,7 +3331,7 @@
 
             var co = new CodeOutput(filename, null, GlobalUsings);
             co.AddUsings(Template.StoredProcReturnModelUsings());
-            co.AddCode(Template.Transform(Template.StoredProcReturnModels(), data));
+            co.AddCode(Template.Transform(Template.StoredProcReturnModels().Replace("\n", string.Empty), data));
             return co;
         }
 
@@ -3348,7 +3345,7 @@
             }
 
             var co = new CodeOutput(filename, null, null);
-            co.AddCode(Template.Transform(Template.Enums(), enumeration));
+            co.AddCode(Template.Transform(Template.Enums().Replace("\n", string.Empty), enumeration));
 
             return co;
         }
